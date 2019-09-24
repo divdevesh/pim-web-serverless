@@ -5,7 +5,8 @@ phases:
       python: 3.7
     commands:
       - python --version
-      - aws iam get-instance-profile
+      - export AWS_ACCESS_KEY_ID=AKIAXTT4BLQKC6LVO4CH
+      - export AWS_SECRET_ACCESS_KEY=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
       - ls -lrt
       - cd pim_app
       - ls -lrt

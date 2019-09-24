@@ -5,6 +5,7 @@ phases:
       python: 3.7
     commands:
       - python --version
+      - aws
       - ls -lrt
       - cd pim_app
       - ls -lrt

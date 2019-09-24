@@ -4,6 +4,6 @@
         "django_settings": "pim.settings",
         "project_name": "pim-web-serverless",
         "runtime": "python3.7",
-        "s3_bucket": "temp-zappa-pim-bucket"
+        "s3_bucket": "pim-web-serverless-zappa-bucket"
     }
 }

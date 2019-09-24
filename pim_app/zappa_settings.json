@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "aws_region": "us-west-2",
+        "django_settings": "pim.settings",
+        "profile_name": "default",
+        "project_name": "pim-web",
+        "runtime": "python3.7",
+        "s3_bucket": "pim-zappa-bucket",
+        "vpc_config" : {
+            "SubnetIds": [ "subnet-127be574","subnet-081ea140" ], // use the private subnet
+            "SecurityGroupIds": [ "sg-f8a53b85" ]
+        }
+    }
+}

@@ -1,0 +1,18 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.7
+    commands:
+      - python --version
+      - ls -lrt
+      - cd pim_app
+      - ls -lrt
+      - python -m venv .venv
+      - . .venv/bin/activate
+      - pip install zappa
+      - ls -lrt
+      - cp ../zappa_settings.json ./
+      - zappa deploy dev
+
+      

@@ -1,0 +1,8 @@
+{
+	"codePipeline": {
+        "enabled": true
+    },
+    "codeBuild": {
+        "image": "aws/codebuild/standard:2.0"
+    }
+}

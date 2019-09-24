@@ -5,7 +5,7 @@ phases:
       python: 3.7
     commands:
       - python --version
-      - aws
+      - aws iam get-instance-profile
       - ls -lrt
       - cd pim_app
       - ls -lrt

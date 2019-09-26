@@ -5,7 +5,6 @@ phases:
       python: 3.7
     commands:
       - python --version
-      - export AWS_SECRET_ACCESS_KEY=bs5yGoDcyFnUiX9UPy1AX7G+bff/Wo2FlJ0A+6Ys
       - ls -lrt
       - cd pim_app
       - ls -lrt

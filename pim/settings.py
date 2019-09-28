@@ -178,7 +178,7 @@ os.environ['product-category-changes-ARN'] = 'arn:aws:sns:eu-west-1:751354400372
 #os.environ['product-core-sync-queue-url'] = 'https://172.17.0.2:9324/test'
 
 # aws config
-YOUR_S3_BUCKET = "pim-web-serverless-zappastatic-10r0c97j0kvya"
+YOUR_S3_BUCKET = "pim-web-serverless-zappastatic-hhmu42m3obor"
 
 STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
 AWS_S3_BUCKET_NAME_STATIC = YOUR_S3_BUCKET

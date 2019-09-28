@@ -1,0 +1,132 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Transform": "AWS::Serverless-2016-10-31",
+  "Description": "An AWS Serverless Application created with mhdev-cli",
+
+  "Resources": {
+    "ZappaStatic": {
+      "Type": "AWS::S3::Bucket",
+      "Properties" : {
+        "AccessControl" : "PublicRead",
+        "CorsConfiguration" : {
+          "CorsRules" : [
+            {
+              "AllowedHeaders" : [ "Authorization" ],
+              "AllowedMethods" : [ "GET" ],
+              "AllowedOrigins" : [ "*" ],
+              "MaxAge" : 3000
+            }
+          ]
+        }
+      }
+    },
+
+    "PimRdsVpc" : {
+      "Type" : "AWS::EC2::VPC",
+      "Properties" : {
+        "CidrBlock" : "192.168.0.0/16",
+        "Tags" : [
+          {
+            "Key" : "Name",
+            "Value" : "PimRdsVpc"
+          }
+        ]
+      }
+    },
+
+    "PimRdsSubnet1" : {
+      "Type" : "AWS::EC2::Subnet",
+      "Properties" : {
+        "AvailabilityZone" : "eu-west-1a",
+        "VpcId" : {
+          "Ref" : "PimRdsVpc"
+        },
+        "CidrBlock" : "192.168.1.0/24",
+        "Tags" : [
+          {
+            "Key" : "Name",
+            "Value" : "subnet1"
+          }
+        ]
+      }
+    },
+
+    "PimRdsSubnet2" : {
+      "Type" : "AWS::EC2::Subnet",
+      "Properties" : {
+        "AvailabilityZone" : "eu-west-1b",
+        "VpcId" : {
+          "Ref" : "PimRdsVpc"
+        },
+        "CidrBlock" : "192.168.2.0/24",
+        "Tags" : [
+          {
+            "Key" : "Name",
+            "Value" : "subnet2"
+          }
+        ]
+      }
+    },
+
+    "PimRdsSubnetGroup" : {
+      "Type" : "AWS::RDS::DBSubnetGroup",
+      "Properties" : {
+        "DBSubnetGroupDescription" : "Subnet for pim aurora cluster",
+        "SubnetIds" : [
+          { "Ref" : "PimRdsSubnet2" },
+          { "Ref" : "PimRdsSubnet1" }
+        ],
+      }
+    },
+
+    "PimRdsSecurityGroup" : {
+      "Type" : "AWS::EC2::SecurityGroup",
+      "Properties" : {
+        "GroupDescription" : "Allow aurora mysql connections",
+        "SecurityGroupIngress" : [ 
+          {
+            "IpProtocol" : "tcp",
+            "FromPort" : 3306,
+            "ToPort" : 3306,
+            "CidrIp" : "0.0.0.0/0"
+          }
+        ],
+        "SecurityGroupEgress" : [
+          {
+            "IpProtocol" : "tcp",
+            "FromPort" : 80,
+            "ToPort" : 80,
+            "CidrIp" : "0.0.0.0/0"
+          }
+        ],
+        "VpcId" : { "Ref" : "PimRdsVpc"},
+        "Tags" : [
+          {
+            "Key" : "Name", 
+            "Value": "PimRdsSecurityGroup"
+          }
+        ]
+      }
+    },
+
+    "PimAurora" : {
+      "Type" : "AWS::RDS::DBCluster",
+      "Properties" : {
+        "DBClusterIdentifier" : "PimAuroraCluster",
+        "Engine" : "aurora",
+        "EngineMode" : "serverless",
+        "EngineVersion" : "5.6.10a",
+        "ScalingConfiguration" : {
+          "AutoPause" : "true",
+          "MaxCapacity" : 8,
+          "MinCapacity" : 2,
+          "SecondsUntilAutoPause" : 1000
+        },
+        "MasterUsername" : "PimUsername",
+        "MasterUserPassword" : "PimPassword",
+        "VpcSecurityGroupIds" : [{ "Ref" : "PimRdsSecurityGroup" }],
+        "DBSubnetGroupName" : { "Ref" : "PimRdsSubnetGroup" }
+      }
+    }
+  }
+}

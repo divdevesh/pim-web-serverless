@@ -1,0 +1,10 @@
+{
+    "dev": {
+        "aws_region": "eu-west-1",
+        "django_settings": "pim.settings",
+        "project_name": "pim-web-serverless",
+        "runtime": "python3.7",
+        "s3_bucket": "zappa-pim-web-serverless",
+        "slim_handler": true
+    }
+}

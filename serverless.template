@@ -30,12 +30,8 @@
         "Engine": "MySQL",
         "EngineVersion": "5.7.22",
         "Iops": "1000",
-        "MasterUsername": {
-            "Ref": "DBUser"
-        },
-        "MasterUserPassword": {
-            "Ref": "DBPassword"
-        }
+        "MasterUsername": "DBUser",
+        "MasterUserPassword": "DBPassword"
       }
     }
     

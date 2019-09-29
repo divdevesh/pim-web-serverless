@@ -20,19 +20,6 @@
           ]
         }
       }
-    },
-
-    "MyDB": {
-      "Type": "AWS::RDS::DBInstance",
-      "Properties": {
-        "AllocatedStorage": "100",
-        "DBInstanceClass": "db.t3.small",
-        "Engine": "MySQL",
-        "EngineVersion": "5.7.22",
-        "Iops": "1000",
-        "MasterUsername": "DBUser",
-        "MasterUserPassword": "DBPassword"
-      }
     }
   }
 }

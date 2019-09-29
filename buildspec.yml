@@ -15,7 +15,7 @@ phases:
       # - printf "y" | zappa undeploy dev
       # - zappa deploy dev
       # - python manage.py collectstatic --noinput
-      - zappa update dev
+      # - zappa update dev
       # - python manage.py makemigrations
       # - zappa manage dev migrate
 

@@ -103,10 +103,10 @@ WSGI_APPLICATION = 'pim.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pim',
+        'NAME': 'pimdb',
         'USER': 'postgres',
-        'PASSWORD': '2Czg8hIdrhSvn782WbPl',
-        'HOST': 'database-2.c6ryrskqjdof.us-west-2.rds.amazonaws.com',
+        'PASSWORD': 'postgres',
+        'HOST': 'database-1.cckbych46y21.eu-west-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }

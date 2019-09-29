@@ -4,16 +4,16 @@ phases:
     runtime-versions:
       python: 3.7
     commands:
-      - python -m venv ve
-      - . ve/bin/activate
-      - pip install -r requirements.txt 
+#       - python -m venv ve
+#       - . ve/bin/activate
+#       - pip install -r requirements.txt 
       - aws cloudformation package --template-file serverless.template --s3-bucket codepipeline-eu-west-1-489647804811 --output-template-file transformed-template.json
       - aws cloudformation deploy --template-file transformed-template.json --stack-name pim-web-serverless-ext --capabilities CAPABILITY_IAM --no-fail-on-empty-changeset
       
   post_build:
     commands:
       # - printf "y" | zappa undeploy dev
-      - zappa deploy dev
+#       - zappa deploy dev
       # - python manage.py collectstatic --noinput
       # - zappa update dev
       # - python manage.py makemigrations

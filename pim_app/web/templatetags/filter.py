@@ -1,4 +1,3 @@
-import os
 from datetime import datetime
 from django import template
 from django import forms
@@ -68,7 +67,7 @@ def image_or_default(value, arg="large"):
         static_folder = "/pim/article-image/"
 
     if settings.DEBUG and value.source != "mathem":
-        static_domain = 'static.mhdev.se'
+        static_domain = "static.mathem.se"
 
     conn = http.client.HTTPSConnection(static_domain)
     conn.request("HEAD", static_folder + arg + "/" + value.filename)

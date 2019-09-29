@@ -4,22 +4,19 @@
   "Description": "An AWS Serverless Application created with mhdev-cli",
 
   "Resources": {
-
-    "ZappaStatic": {
-      "Type": "AWS::S3::Bucket",
-      "Properties" : {
-        "AccessControl" : "PublicRead",
-        "CorsConfiguration" : {
-          "CorsRules" : [
-            {
-              "AllowedHeaders" : [ "Authorization" ],
-              "AllowedMethods" : [ "GET" ],
-              "AllowedOrigins" : [ "*" ],
-              "MaxAge" : 3000
-            }
-          ]
-        }
+    "PimZappa": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Runtime": "python3.7",
+        "Handler": "function.price_handler",
+        "Role": null,
+        "Policies": ["AWSLambdaFullAccess", "AWSXrayWriteOnlyAccess", "AmazonS3FullAccess", "AmazonSQSFullAccess"],
+        "Timeout": 10,
+        "MemorySize": 1536
       }
+    },
+    "randombucket": {
+      "Type": "AWS::S3::Bucket"
     }
   }
 }

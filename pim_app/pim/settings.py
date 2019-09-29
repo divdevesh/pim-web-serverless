@@ -27,7 +27,7 @@ SECRET_KEY = '(dald#^q55hsmk)$pc%zz^y86&7p8=_f#&i%!yx^%^apcn8r-_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.execute-api.eu-west-1.amazonaws.com']
+ALLOWED_HOSTS = [ '127.0.0.1', '.execute-api.us-west-2.amazonaws.com', ]
 
 INTERNAL_IPS = ['127.0.0.1']
 
@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'social_django',
     'simple_history',
     'drf_yasg',
-    'django_s3_storage',
+    'zappa_django_utils',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -102,15 +103,14 @@ WSGI_APPLICATION = 'pim.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Pimdb',
-        'USER': 'DBUser',
-        'PASSWORD': 'DBPassword',
-        'HOST': 'pmw2d63wr24crl.cckbych46y21.eu-west-1.rds.amazonaws.com',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'pim',
+        'USER': 'postgres',
+        'PASSWORD': '2Czg8hIdrhSvn782WbPl',
+        'HOST': 'database-2.c6ryrskqjdof.us-west-2.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -177,13 +177,22 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {'hd': 'mathem.se'}
 os.environ['product-category-changes-ARN'] = 'arn:aws:sns:eu-west-1:751354400372:pim2-productcategory-testshot'
 #os.environ['product-core-sync-queue-url'] = 'https://172.17.0.2:9324/test'
 
-# aws config
-YOUR_S3_BUCKET = "pim-web-serverless-ext-zappastatic-rhf0fc6e783e"
 
-STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
-AWS_S3_BUCKET_NAME_STATIC = YOUR_S3_BUCKET
+# aws settings
+AWS_S3_OBJECT_PARAMETERS = {
+    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+    'CacheControl': 'max-age=94608000',
+}
 
-# These next two lines will serve the static files directly 
-# from the s3 bucket
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % YOUR_S3_BUCKET
-STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+AWS_STORAGE_BUCKET_NAME = 'pim-web-zappa-static'
+AWS_S3_REGION_NAME = 'us-west-2'  # e.g. us-east-2
+AWS_ACCESS_KEY_ID = 'AKIAXTT4BLQKL4E5BNIR'
+AWS_SECRET_ACCESS_KEY = 'w2ay6Bz8G2FmBXtzJrMJ5BfSBT2x3Zyp5krSR44E'
+
+# Tell django-storages the domain to use to refer to static files.
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+# Tell the staticfiles app to use S3Boto3 storage when writing the collected static files (when
+# you run `collectstatic`).
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+

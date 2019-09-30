@@ -15,6 +15,18 @@
         "MemorySize": 1536
       }
     },
+
+    "zappadb": {
+        "Type": "AWS::RDS::DBInstance",
+        "Properties": {
+            "AllocatedStorage": "100",
+            "DBInstanceClass": "db.t3.small",
+            "Engine": "postgres",
+            "MasterUsername": "postgres"
+            "MasterUserPassword": "postgres"
+        }
+    },
+
     "randombucket": {
       "Type": "AWS::S3::Bucket"
     }

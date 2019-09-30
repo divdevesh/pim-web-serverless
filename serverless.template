@@ -22,7 +22,7 @@
             "AllocatedStorage": "100",
             "DBInstanceClass": "db.t3.small",
             "Engine": "postgres",
-            "MasterUsername": "postgres"
+            "MasterUsername": "postgres",
             "MasterUserPassword": "postgres"
         }
     },

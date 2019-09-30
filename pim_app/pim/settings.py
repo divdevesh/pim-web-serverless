@@ -27,7 +27,7 @@ SECRET_KEY = '(dald#^q55hsmk)$pc%zz^y86&7p8=_f#&i%!yx^%^apcn8r-_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ '127.0.0.1', '.amazonaws.com', ]
+ALLOWED_HOSTS = [ '127.0.0.1', '.amazonaws.com', 'localhost' ]
 
 INTERNAL_IPS = ['127.0.0.1']
 
@@ -89,16 +89,16 @@ WSGI_APPLICATION = 'pim.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'pim',
-#         'USER': 'pim-user',
-#         'PASSWORD': 'pim-user',
-#         'HOST': 'localhost',
-#         'PORT': '',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'pim',
+        'USER': 'pim-user',
+        'PASSWORD': 'pim-user',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 
 # DATABASES = {
 #     'default': {
@@ -111,16 +111,16 @@ WSGI_APPLICATION = 'pim.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pimdb',
-        'USER': 'admin',
-        'PASSWORD': 'password',
-        'HOST': 'database-2.cluster-cckbych46y21.eu-west-1.rds.amazonaws.com',
-        'PORT': '3306',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'pimdb',
+#         'USER': 'admin',
+#         'PASSWORD': 'password',
+#         'HOST': 'database-2.cluster-cckbych46y21.eu-west-1.rds.amazonaws.com',
+#         'PORT': '3306',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -187,17 +187,17 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {'hd': 'mathem.se'}
 os.environ['product-category-changes-ARN'] = 'arn:aws:sns:eu-west-1:751354400372:pim2-productcategory-testshot'
 #os.environ['product-core-sync-queue-url'] = 'https://172.17.0.2:9324/test'
 
-# aws config
+# # aws config
 
-YOUR_S3_BUCKET = "pim-web-zappa-static"
+# YOUR_S3_BUCKET = "pim-web-zappa-static"
 
-STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
-AWS_S3_BUCKET_NAME_STATIC = YOUR_S3_BUCKET
+# STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
+# AWS_S3_BUCKET_NAME_STATIC = YOUR_S3_BUCKET
 
-# These next two lines will serve the static files directly 
-# from the s3 bucket
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % YOUR_S3_BUCKET
-STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+# # These next two lines will serve the static files directly 
+# # from the s3 bucket
+# AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % YOUR_S3_BUCKET
+# STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
-# OR...if you create a fancy custom domain for your static files use:
-#AWS_S3_PUBLIC_URL_STATIC = "https://static.zappaguide.com/"
+# # OR...if you create a fancy custom domain for your static files use:
+# #AWS_S3_PUBLIC_URL_STATIC = "https://static.zappaguide.com/"

@@ -100,27 +100,27 @@ WSGI_APPLICATION = 'pim.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'pimdb',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'database-1.cckbych46y21.eu-west-1.rds.amazonaws.com',
-#         'PORT': '5432',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pimdb',
-        'USER': 'admin',
-        'PASSWORD': 'password',
-        'HOST': 'database-2.cluster-cckbych46y21.eu-west-1.rds.amazonaws.com',
-        'PORT': '3306',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'database-1.cckbych46y21.eu-west-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'pimdb',
+#         'USER': 'admin',
+#         'PASSWORD': 'password',
+#         'HOST': 'database-2.cluster-cckbych46y21.eu-west-1.rds.amazonaws.com',
+#         'PORT': '3306',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -163,7 +163,7 @@ DATETIME_FORMAT = 'Y-m-d H:i:s'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -189,15 +189,15 @@ os.environ['product-category-changes-ARN'] = 'arn:aws:sns:eu-west-1:751354400372
 
 # # aws config
 
-# YOUR_S3_BUCKET = "pim-web-zappa-static"
+YOUR_S3_BUCKET = "pim-web-zappa-static"
 
-# STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
-# AWS_S3_BUCKET_NAME_STATIC = YOUR_S3_BUCKET
+STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
+AWS_S3_BUCKET_NAME_STATIC = YOUR_S3_BUCKET
 
-# # These next two lines will serve the static files directly 
-# # from the s3 bucket
-# AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % YOUR_S3_BUCKET
-# STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+# These next two lines will serve the static files directly 
+# from the s3 bucket
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % YOUR_S3_BUCKET
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
-# # OR...if you create a fancy custom domain for your static files use:
-# #AWS_S3_PUBLIC_URL_STATIC = "https://static.zappaguide.com/"
+# OR...if you create a fancy custom domain for your static files use:
+#AWS_S3_PUBLIC_URL_STATIC = "https://static.zappaguide.com/"
